@@ -1,22 +1,20 @@
 <template>
-  <div class="navbar navbar-dark bg-dark mb-3">
+  <div class="navbar navbar-dark bg-dark">
     <div class="navbar-brand">
-      Dice roller
+      Dice calculator
     </div>
   </div>
-  <div class="container">
+  <main class="container">
     <Dice />
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
 import { ref } from 'vue';
-import Bingo from './components/Bingo.vue';
 import Dice from './components/Dice.vue';
 
 export default {
   components: {
-    Bingo,
     Dice,
   },
   setup() {
@@ -28,13 +26,17 @@ export default {
 };
 </script>
 
-<style scoped>
-h1 {
-  color: #4fc08d;
-}
-
+<style>
 h1,
 p {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+  max-width: 900px;
+}
+
+button.btn {
+  touch-action: manipulation;
 }
 </style>
