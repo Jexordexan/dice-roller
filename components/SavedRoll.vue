@@ -1,30 +1,33 @@
 <template>
-  <input type="text" @keypress.enter="roll" v-model="expr" />
-  <button @click="roll">ROLL!</button>
-  <div v-if="result">Result: {{ result }}</div>
+  <div class="list-group-item d-flex">
+    <div>
+      <strong>
+        {{ name }}
+      </strong>
+      <div class="text-muted">
+        {{ expression }}
+      </div>
+    </div>
+    <span class="ml-auto mr-2 h2 align-self-center">{{ tweenedResult || '--' }}</span>
+    <button class="btn btn-primary" @click="roll">
+      ROLL
+    </button>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue';
-
-interface IBook {
-  id: string;
-  isbn?: string;
-  title?: string;
-}
+import useTween from '../hooks/useTween';
 
 export default defineComponent({
   props: {
     name: String,
-    greeting: {
+    expression: {
       type: String,
-      default: 'hello',
+      default: '',
     },
-    books: Array as PropType<IBook[]>,
   },
   setup(props) {
-    console.log(props);
-    const expr = ref('');
     const result = ref(0);
 
     function dN(N: number) {
@@ -53,7 +56,7 @@ export default defineComponent({
     }
 
     function roll() {
-      const portions = expr.value.split('+').map((s) => s.trim());
+      const portions = props.expression.split('+').map((s) => s.trim());
 
       result.value = portions.reduce((sum, r) => {
         if (r.includes('d')) {
@@ -66,8 +69,10 @@ export default defineComponent({
       }, 0);
     }
 
+    const { tweened: tweenedResult } = useTween(result, 250);
+
     return {
-      expr,
+      tweenedResult,
       result,
       roll,
     };
