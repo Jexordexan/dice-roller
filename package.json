@@ -1,8 +1,9 @@
 {
-  "name": "ajs-vite",
+  "name": "dice-roller",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "start": "npm run dev",
     "build": "vite build"
   },
   "dependencies": {
