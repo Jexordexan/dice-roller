@@ -1,12 +1,10 @@
 <template>
-  <div class="navbar navbar-dark bg-dark">
-    <div class="navbar-brand">
-      Dice calculator
-    </div>
-  </div>
   <main class="container">
     <Dice />
   </main>
+  <footer class="text-muted small p-2 text-center">
+    Made with 🎲 by Jordan Simonds
+  </footer>
 </template>
 
 <script lang="ts">
@@ -27,16 +25,17 @@ export default {
 </script>
 
 <style>
-h1,
-p {
-  font-family: Arial, Helvetica, sans-serif;
+body {
+  font-family: 'Lato', 'Helvetica Neue', 'Roboto', sans-serif;
 }
 
 main {
   max-width: 900px;
+  min-height: 100vh;
 }
 
 button.btn {
   touch-action: manipulation;
+  text-transform: uppercase;
 }
 </style>
