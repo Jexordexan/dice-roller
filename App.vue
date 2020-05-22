@@ -1,6 +1,7 @@
 <template>
   <main class="container">
     <Dice />
+    <!-- <DiceObject /> -->
   </main>
   <footer class="text-muted small p-2 text-center">
     Made with 🎲 by Jordan Simonds
@@ -10,23 +11,19 @@
 <script lang="ts">
 import { ref } from 'vue';
 import Dice from './components/Dice.vue';
+import DiceObject from './components/DiceObject.vue';
 
 export default {
   components: {
     Dice,
-  },
-  setup() {
-    const count = ref(0);
-    return {
-      count,
-    };
+    DiceObject,
   },
 };
 </script>
 
 <style>
 body {
-  font-family: 'Lato', 'Helvetica Neue', 'Roboto', sans-serif;
+  font-family: 'Tinos', 'Garamond', serif;
 }
 
 main {
