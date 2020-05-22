@@ -12,7 +12,7 @@
         {{ expression }}
       </div>
     </div>
-    <span class="ml-auto mx-2 my-0 h2 align-self-center text-success">{{ tweenedResult || '--' }}</span>
+    <span class="ml-auto mx-2 my-0 h2 align-self-center text-success flex-shrink-0">{{ tweenedResult || '--' }}</span>
     <button class="btn btn-primary" @click="rollDice">
       Roll
     </button>
@@ -25,10 +25,15 @@ import useTween from '../hooks/useTween';
 import { rollExpression, playDiceSound } from '../utils/diceRolling';
 
 export default defineComponent({
+  name: 'SavedRoll',
   props: {
-    name: String,
     expression: {
-      default: '',
+      type: String,
+      default: '', // `default: ''` or `required: true` make this prop non-null
+      // required: true
+    },
+    name: {
+      type: String, // This prop is optional
     },
   },
   setup(props) {
@@ -48,5 +53,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style></style>
