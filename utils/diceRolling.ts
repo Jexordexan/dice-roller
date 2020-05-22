@@ -23,9 +23,20 @@ export function parseRoll(str: string): number {
   return rollDieMTimes(parseInt(M), parseInt(N));
 }
 
+const audioElementId = 'diceRollAudio';
+
+export function injectSounds() {
+  if (document.getElementById(audioElementId)) return;
+  const audioElement = document.createElement('audio');
+  audioElement.id = audioElementId;
+  audioElement.setAttribute('src', '/public/roll.wav');
+  document.body.appendChild(audioElement);
+}
+
 export function playDiceSound() {
   const audioElement = document.getElementById('diceRollAudio') as HTMLAudioElement;
   if (!audioElement) return;
+  audioElement.currentTime = 0;
   audioElement.play();
 }
 

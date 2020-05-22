@@ -15,7 +15,7 @@ export default function useTween(source: Ref<number>, duration: number = 500) {
       frameHandler = requestAnimationFrame(animate);
     };
 
-    const myTween = new TWEEN.Tween(tweened)
+    new TWEEN.Tween(tweened)
       .to({ value: current }, duration)
       .onUpdate(() => {
         tweened.value = Math.round(tweened.value);
