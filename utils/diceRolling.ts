@@ -11,8 +11,8 @@ export function rollDieMTimes(M: number, N: number) {
   return sum;
 }
 
-export function parseInt(str: string): number {
-  return Number(str);
+export function toInt(str: string): number {
+  return parseInt(str, 10);
 }
 
 export function parseRoll(str: string): number {
@@ -20,7 +20,7 @@ export function parseRoll(str: string): number {
   const match = rollRE.exec(str);
   if (!match) return 0;
   const [_, M, N] = match;
-  return rollDieMTimes(parseInt(M), parseInt(N));
+  return rollDieMTimes(toInt(M), toInt(N));
 }
 
 const audioElementId = 'diceRollAudio';
@@ -46,8 +46,8 @@ export function rollExpression(expression: string): number {
   const result = portions.reduce((sum, r) => {
     if (r.includes('d')) {
       return sum + parseRoll(r);
-    } else if (parseInt(r)) {
-      return sum + parseInt(r);
+    } else if (toInt(r)) {
+      return sum + toInt(r);
     } else {
       return sum;
     }
