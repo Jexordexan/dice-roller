@@ -85,8 +85,10 @@ export const simulate = memoizeWith(
   }
 );
 
-const defaultSamples = 10000;
+const defaultSamples = 50000;
 export const runSimulation = memoizeWith(identity, (expression: string) => {
+  console.time('roll simulation took:');
   const result = simulate(expression, defaultSamples);
+  console.timeEnd('roll simulation took:');
   return toPairs(countBy(Number)(result));
 });

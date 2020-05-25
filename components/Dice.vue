@@ -1,14 +1,17 @@
 <template>
   <div>
-    <header class="row text-center bg-dark mb-2 text-light">
-      <div class="col mx-auto p-2">
-        <legend id="total-label" class="font-weight-bold">Total</legend>
-        <h1 id="roll-total" aria-describedby="total-label" class="text-warning" :class="{ shake: animating }">
-          {{ tweenedTotal || '--' }}
-        </h1>
-        <div class="sr-only" aria-live="polite">Total: {{ total }}</div>
-        <div class="text-white-50">
-          {{ expression || 'Roll some dice!' }}
+    <header class="row text-center bg-dark mb-2 text-light total-header">
+      <div class="col mx-auto p-0">
+        <Histogram :class="{ invisible: rollMap.size === 0 }" :expression="expression" :value="result" />
+        <div class="header-content">
+          <legend id="total-label" class="font-weight-bold">Total</legend>
+          <h1 id="roll-total" aria-describedby="total-label" class="text-warning" :class="{ shake: animating }">
+            {{ tweenedTotal || '--' }}
+          </h1>
+          <div class="sr-only" aria-live="polite">Total: {{ total }}</div>
+          <div class="text-white-50">
+            {{ expression || 'Roll some dice!' }}
+          </div>
         </div>
       </div>
     </header>
@@ -83,7 +86,7 @@
 import { defineComponent, ref, reactive, computed, onMounted } from 'vue';
 
 // Utilities for rolling dice
-import { rollDie, rollExpression, playDiceSound, injectSounds } from '../utils/diceRolling';
+import { rollDie, rollExpression, playDiceSound, injectSounds, runSimulation, simulate } from '../utils/diceRolling';
 
 // These composition functions are just shared reactive logic utilities
 import useTween from '../hooks/useTween';
@@ -91,6 +94,7 @@ import useLocalStorage from '../hooks/useLocalStorage';
 
 // Import components the same old way
 import SavedRoll from './SavedRoll.vue';
+import Histogram from './Histogram.vue';
 
 interface Roll {
   expression: string;
@@ -101,6 +105,7 @@ export default defineComponent({
   name: 'Dice',
   components: {
     SavedRoll,
+    Histogram,
   },
   // These are longer needed... but still work!
   // data() {}
@@ -161,7 +166,6 @@ export default defineComponent({
 
     function reRoll() {
       playDiceSound();
-      result.value = 0;
       result.value = rollExpression(expression.value);
     }
 
@@ -214,15 +218,24 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.total-header {
+  position: relative;
+  height: 150px;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+}
+
 .die-button {
   width: 100px;
 }
 
 .shake {
-  animation: shake 250ms ease-in-out;
   opacity: 0.5;
-  filter: blur(2px);
-  transform-origin: center;
+  filter: blur(3px);
+  animation: shake 250ms;
 }
 
 @keyframes shake {
@@ -230,16 +243,10 @@ export default defineComponent({
     transform: translate(0px, 0px) rotate(0);
   }
   20% {
-    transform: translateX(20px) rotate(10deg);
-  }
-  40% {
-    transform: translateY(20px) rotate(-10deg);
-  }
-  60% {
-    transform: translateX(-20px) rotate(10deg);
+    transform: translate(20px, 20px) rotate(10deg);
   }
   80% {
-    transform: translateY(-20px) rotate(-10deg);
+    transform: translate(-20px, -20px) rotate(-10deg);
   }
   100% {
     transform: translate(0px, 0px) rotate(0);
