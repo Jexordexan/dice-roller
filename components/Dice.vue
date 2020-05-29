@@ -145,11 +145,19 @@ export default defineComponent({
       if (modifier.value > 0) list.push(`${modifier.value}`);
       return list.join(' + ');
     });
-    // Using external logic to get a ref for a tweened value
+
+    // Using external logic to get a ref for a tweened version of result
     const { tweened, animating } = useTween(result, 250);
 
     const total = computed(() => result.value + modifier.value);
     const tweenedTotal = computed(() => tweened.value + modifier.value);
+
+    // onMounted hook runs when this component mounts to the DOM
+    // just like the mounted lifecycle method
+    // This allows us to play dice sounds by injecting <audio> elements
+    onMounted(() => {
+      injectSounds();
+    });
 
     // These are like methods, except they are plain old functions!
     function recordRoll(die: number) {
@@ -186,13 +194,6 @@ export default defineComponent({
       if (index < 0 || index >= savedRolls.value.length) return;
       savedRolls.value.splice(index, 1);
     }
-
-    // onMounted hook runs when this component mounts to the DOM
-    // just like the mounted lifecycle method
-    // This allows us to play dice sounds by injecting <audio> elements
-    onMounted(() => {
-      injectSounds();
-    });
 
     return {
       // Roll editor
