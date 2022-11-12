@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/public/favicon.ico" type="image/x-icon" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
-      crossorigin="anonymous"
-    />
-    <link href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;700&display=swap" rel="stylesheet" />
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.5.0/Tween.js"></script> -->
-    <title>Dice Roller</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module">
-      import { createApp } from 'vue';
-      import App from './App.vue';
 
-      createApp(App).mount('#app');
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/public/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Tinos:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.5.0/Tween.js"></script> -->
+  <title>Dice Roller</title>
+</head>
+
+<body class="bg-dark text-light">
+  <div id="app"></div>
+  <script type="module">
+    import 'uno.css';
+    import { createApp } from 'vue';
+    import App from './App.vue';
+
+    createApp(App).mount('#app');
+  </script>
+</body>
+
 </html>

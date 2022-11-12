@@ -1,34 +1,28 @@
 <template>
-  <main class="container">
+  <main>
     <Dice />
-    <!-- <DiceObject /> -->
   </main>
   <footer class="text-muted small p-2 text-center">
     Made with 🎲 by Jordan Simonds
   </footer>
 </template>
 
-<script lang="ts">
-import { ref } from 'vue';
+<script lang="ts" setup>
 import Dice from './components/Dice.vue';
-import DiceObject from './components/DiceObject.vue';
-
-export default {
-  components: {
-    Dice,
-    DiceObject,
-  },
-};
 </script>
 
 <style>
 body {
   font-family: 'Tinos', 'Garamond', serif;
+  /* min-height: 100vh;
+  display: flex; */
 }
 
 main {
-  max-width: 900px;
-  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 2rem;
+  max-width: 700px;
+  flex-grow: 1;
 }
 
 button.btn {
